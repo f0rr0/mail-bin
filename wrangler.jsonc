@@ -1,0 +1,34 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "mail-bin",
+	"main": "./src/index.ts",
+	"compatibility_date": "2026-04-19",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"assets": {
+		"directory": "./dist/client",
+		"not_found_handling": "single-page-application"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "mail-bin",
+			// Replace these placeholder IDs before remote deploys.
+			"database_id": "00000000-0000-0000-0000-000000000000",
+			"preview_database_id": "00000000-0000-0000-0000-000000000000",
+			"migrations_dir": "./drizzle"
+		}
+	],
+	"vars": {
+		"APP_NAME": "Mail Bin",
+		"APP_ENV": "development"
+	},
+	"observability": {
+		"enabled": true
+	}
+}
