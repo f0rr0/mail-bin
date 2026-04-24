@@ -12,7 +12,6 @@ permissions:
 jobs:
   commit-style:
     name: Commit Style
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
@@ -32,10 +31,15 @@ jobs:
         with:
           bun-version: 1.3.8
 
-      - name: Check PR title
+      - name: Check commit style
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
-        run: bun run commitlint -- "$PR_TITLE"
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+            bun run commitlint -- "$PR_TITLE"
+          else
+            bun run commitlint -- "$(git log -1 --pretty=%s)"
+          fi
 
   verify:
     name: Verify
