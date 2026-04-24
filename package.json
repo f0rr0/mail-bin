@@ -28,9 +28,9 @@
 		"quality": "bun run lint",
 		"quality:fix": "bun run lint:fix",
 		"typecheck": "tsgo --noEmit",
-		"test": "vitest run",
+		"test": "vite build && vitest run",
 		"test:watch": "vitest",
-		"verify": "bun run lint && bun run lint:type-aware && bun run typecheck && bun run test && bun run build",
+		"verify": "bun run lint && bun run lint:type-aware && bun run typecheck && bun run test",
 		"mail:fixture": "bun run ./scripts/replay-mail-fixture.ts ./fixtures/mail",
 		"prepare": "lefthook install"
 	},
