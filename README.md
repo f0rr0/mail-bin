@@ -29,7 +29,7 @@ bun install
 Create a local `.dev.vars` from the example:
 
 ```sh
-cp examples/dev.vars.example .dev.vars
+cp .dev.vars.example .dev.vars
 ```
 
 Optional Cloudflare sync variables:
@@ -151,7 +151,7 @@ The deploy workflow generates an ephemeral `.wrangler/generated/wrangler.jsonc`,
 
 ## Contributing and Releases
 
-See [.github/CONTRIBUTING.md](./.github/CONTRIBUTING.md) for local setup, pull request expectations, commit message rules, and release steps.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for local setup, pull request expectations, commit message rules, and release steps.
 
 Commit subjects use Conventional Commits:
 

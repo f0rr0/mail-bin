@@ -6,7 +6,7 @@ Mail Bin is a single-package Cloudflare Workers app. Keep changes small, explici
 
 1. Install Bun `1.3.8`.
 2. Run `bun install`.
-3. Run `cp examples/dev.vars.example .dev.vars`.
+3. Run `cp .dev.vars.example .dev.vars`.
 4. Run `bun run db:migrate:local`.
 5. Run `bun run dev`.
 
