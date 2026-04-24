@@ -1,19 +1,21 @@
-import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { cloudflare } from "@cloudflare/vite-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
+import { resolveWranglerConfigPath } from "./scripts/lib/wrangler-config";
+
 export default defineConfig({
-	plugins: [react(), tailwindcss(), cloudflare()],
+	build: {
+		emptyOutDir: true,
+		outDir: "dist/client",
+	},
+	plugins: [react(), tailwindcss(), cloudflare({ configPath: resolveWranglerConfigPath() })],
 	resolve: {
 		alias: {
-			"@": resolve(__dirname, "src"),
+			"@": fileURLToPath(new URL("src", import.meta.url)),
 		},
-	},
-	build: {
-		outDir: "dist/client",
-		emptyOutDir: true,
 	},
 });

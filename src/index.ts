@@ -1,26 +1,39 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Bind resources to your worker in `wrangler.jsonc`. After adding bindings, a type definition for the
- * `Env` object can be regenerated with `npm run cf-typegen`.
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { createApiApp } from "@/server/http/app";
+import { handleIncomingEmail } from "@/server/mail/handler";
+import type { AppBindings } from "@/server/app-env";
+
+const apiApp = createApiApp();
+
+export type AppType = typeof apiApp;
 
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
-		const url = new URL(request.url);
-		switch (url.pathname) {
-			case '/message':
-				return new Response('Hello, World!');
-			case '/random':
-				return new Response(crypto.randomUUID());
-			default:
-				return new Response('Not Found', { status: 404 });
-		}
+	async email(
+		message: ForwardableEmailMessage,
+		env: AppBindings,
+		_executionContext: ExecutionContext,
+	) {
+		await handleIncomingEmail(message, env);
 	},
-} satisfies ExportedHandler<Env>;
+
+	fetch(
+		request: Request,
+		env: AppBindings,
+		executionContext: ExecutionContext,
+	): Promise<Response> | Response {
+		const url = new URL(request.url);
+
+		if (url.pathname === "/health") {
+			return Response.json({
+				environment: env.APP_ENV,
+				name: env.APP_NAME,
+				ok: true,
+			});
+		}
+
+		if (url.pathname.startsWith("/api")) {
+			return apiApp.fetch(request, env, executionContext);
+		}
+
+		return env.ASSETS.fetch(request);
+	},
+} satisfies ExportedHandler<AppBindings>;

@@ -1,5 +1,24 @@
 # Cloudflare Workers
 
+# Ultracite
+
+This project uses Ultracite with Oxlint and Oxfmt. Prefer these commands for quality gates:
+
+- `bun x ultracite fix`
+- `bun x ultracite check`
+- `bun x ultracite doctor`
+
+Run `bun run typecheck` for native TypeScript checking through `tsgo`.
+
+## Repo Workflow
+
+- Keep the repo clone-safe and self-contained. Do not depend on files in `~/.config` or other machine-local paths.
+- Use `bun run cf -- <wrangler args>` or the existing package scripts when Wrangler needs the project config. These resolve `WRANGLER_CONFIG`, `wrangler.local.jsonc`, then `wrangler.jsonc`.
+- Do not commit `.dev.vars`, `.env`, `wrangler.local.jsonc`, Cloudflare IDs, Cloudflare API tokens, or real destination inbox addresses.
+- Run `bun run cf:types` after changing Wrangler bindings.
+- Run `bun run verify` before handing off broad repo changes.
+- Commit subjects use Conventional Commits. Check manually with `bun run commitlint -- "feat: short summary"`.
+
 STOP. Your knowledge of Cloudflare Workers APIs and limits may be outdated. Always retrieve current documentation before any Workers, KV, R2, D1, Durable Objects, Queues, Vectorize, AI, or Agents SDK task.
 
 ## Docs
@@ -11,13 +30,13 @@ For all limits and quotas, retrieve from the product's `/platform/limits/` page.
 
 ## Commands
 
-| Command | Purpose |
-|---------|---------|
-| `npx wrangler dev` | Local development |
-| `npx wrangler deploy` | Deploy to Cloudflare |
-| `npx wrangler types` | Generate TypeScript types |
+| Command            | Purpose                   |
+| ------------------ | ------------------------- |
+| `bun run dev`      | Local development         |
+| `bun run deploy`   | Deploy to Cloudflare      |
+| `bun run cf:types` | Generate TypeScript types |
 
-Run `wrangler types` after changing bindings in wrangler.jsonc.
+Run `bun run cf:types` after changing bindings in Wrangler config.
 
 ## Node.js Compatibility
 

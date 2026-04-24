@@ -7,28 +7,25 @@
 	"name": "mail-bin",
 	"main": "./src/index.ts",
 	"compatibility_date": "2026-04-19",
-	"compatibility_flags": [
-		"nodejs_compat"
-	],
+	"compatibility_flags": ["nodejs_compat"],
+	"workers_dev": true,
+	"preview_urls": false,
 	"assets": {
-		"directory": "./dist/client",
-		"not_found_handling": "single-page-application"
+		"directory": "./dist/client/client",
+		"not_found_handling": "single-page-application",
 	},
 	"d1_databases": [
 		{
 			"binding": "DB",
 			"database_name": "mail-bin",
-			// Replace these placeholder IDs before remote deploys.
-			"database_id": "00000000-0000-0000-0000-000000000000",
-			"preview_database_id": "00000000-0000-0000-0000-000000000000",
-			"migrations_dir": "./drizzle"
-		}
+			"migrations_dir": "./drizzle",
+		},
 	],
 	"vars": {
 		"APP_NAME": "Mail Bin",
-		"APP_ENV": "development"
+		"APP_ENV": "development",
 	},
 	"observability": {
-		"enabled": true
-	}
+		"enabled": true,
+	},
 }
