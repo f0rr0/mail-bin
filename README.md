@@ -29,7 +29,7 @@ bun install
 Create a local `.dev.vars` from the example:
 
 ```sh
-cp .dev.vars.example .dev.vars
+cp examples/dev.vars.example .dev.vars
 ```
 
 Optional Cloudflare sync variables:
@@ -107,7 +107,7 @@ Replay sample inbound email fixtures after `bun run dev` is running:
 bun run mail:fixture
 ```
 
-The replay script posts `.eml` files from `fixtures/mail` into Cloudflare's local Email Worker endpoint at `/cdn-cgi/handler/email`.
+The replay script posts `.eml` files from `test/fixtures/mail` into Cloudflare's local Email Worker endpoint at `/cdn-cgi/handler/email`.
 
 ## Cloudflare Onboarding
 
@@ -151,7 +151,7 @@ The deploy workflow generates an ephemeral `.wrangler/generated/wrangler.jsonc`,
 
 ## Contributing and Releases
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for local setup, pull request expectations, commit message rules, and release steps.
+See [.github/CONTRIBUTING.md](./.github/CONTRIBUTING.md) for local setup, pull request expectations, commit message rules, and release steps.
 
 Commit subjects use Conventional Commits:
 

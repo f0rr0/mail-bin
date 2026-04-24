@@ -17,10 +17,8 @@ report.*.json
 .vite/
 
 # Local environment and Cloudflare state
-.dev.vars*
-!.dev.vars.example
-.env*
-!.env.example
+/.dev.vars*
+/.env*
 .wrangler/
 wrangler.local.jsonc
 

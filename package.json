@@ -31,7 +31,7 @@
 		"test": "vite build && vitest run",
 		"test:watch": "vitest",
 		"verify": "bun run lint && bun run lint:type-aware && bun run typecheck && bun run test",
-		"mail:fixture": "bun run ./scripts/replay-mail-fixture.ts ./fixtures/mail",
+		"mail:fixture": "bun run ./scripts/replay-mail-fixture.ts ./test/fixtures/mail",
 		"prepare": "lefthook install"
 	},
 	"dependencies": {
